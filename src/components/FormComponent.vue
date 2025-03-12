@@ -3,18 +3,22 @@
         <form @submit.prevent="onSubmit" class="form-group">
             <div v-for="(field) in fieldDefinitions" :key="field.id" class="form-field">
                 <label>{{ field.label }}</label>
-                <component :is="getComponentName(field)" :field="field"
+                <component 
+                    :is="getComponentName(field)" 
+                    :field="field"
                     :modelValue="modelValue ? modelValue[field.id] : ''" 
                     @update="updateFormData"
-                    :ref="el => setFieldRef(field, el)" />
+                    :ref="el => setFieldRef(field, el)" 
+                />
             </div>
             <div class="button-container">
                 <button type="submit" class="button primary">Guardar</button>
             </div>
-
         </form>
-        <label id="result-label">Result:</label><br/>
-        <textarea id="result" rows="10" cols="50" disabled></textarea>
+        <div class="result-container">
+            <label id="result-label">Result:</label>
+            <textarea id="result" rows="10" cols="50" disabled></textarea>
+        </div>
     </div>
 </template>
 
@@ -118,14 +122,15 @@ input, select, textarea {
 [disabled] {
     cursor: not-allowed;
 }
+
 .button-container {
     text-align: center;
-    margin-bottom: 20px;
-
+    margin: 20px 0px;
     button {
         margin: auto;
     }
 }
+
 .form-field {
     display: flex;
     align-items: center;
